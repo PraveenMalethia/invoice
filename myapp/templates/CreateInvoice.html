@@ -1,0 +1,69 @@
+{% extends "layouts/base.html" %}
+{% block content %}
+<section class="text-gray-400 bg-gray-900 body-font">
+  <div class="container px-5 py-24 mx-auto">
+    <div class="flex flex-col text-center w-full mb-20">
+      <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-white">Create Invoice</h1>
+    </div>
+    <div class="flex flex-wrap -m-4 text-center">
+      <div class="p-4 w-full">
+        <div class="bg-gray-800 rounded-lg shadow sm:max-w-md sm:w-full sm:mx-auto sm:overflow-hidden">
+          <div class="px-4 py-8 sm:px-10">
+            <div class="mt-6">
+              <form action="{% url 'create-invoice' %}" method="post" class="w-full space-y-6"> {% csrf_token %}
+                <select
+                  class="focus:ring-2 focus:ring-purple-600 block w-full text-gray-300 py-2 px-3 bg-gray-800 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
+                  name="customer">
+                  <option value="" selected>
+                    Select an customer
+                  </option>
+                  {% for customer in customers %}
+                  <option value="{{customer.id}}">
+                    {{customer.email}}
+                  </option>
+                  {% endfor %}
+                </select>
+                <div>
+                  <div class="mt-1 relative rounded-md shadow-sm">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                      <span class="text-gray-500 sm:text-sm">
+                        $
+                      </span>
+                    </div>
+                    <input type="number" name="price" id="price"
+                      class="focus:ring-indigo-500 focus:ring-2 focus:ring-purple-600 bg-gray-800 border border-b border-t border-gray-300 py-2 px-4 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm rounded-md"
+                      placeholder="0.00" />
+                  </div>
+                </div>
+                <div class="w-full">
+                  <div class="relative ">
+                    <input type="text" id="search-form-location"
+                      class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-gray-800 text-gray-200 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                      name="item" placeholder="item" />
+                  </div>
+                </div>
+                <div class="w-full">
+                  <label class="text-gray-700" for="name">
+                    <textarea
+                      class="flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-gray-800 text-gray-300 placeholder-gray-400 rounded-lg text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                      id="Description" placeholder="Enter your description" name="description" rows="5" cols="40">
+                    </textarea>
+                  </label>
+                </div>
+                <div>
+                  <span class="block w-full rounded-md shadow-sm">
+                    <button type="submit"
+                      class="py-2 px-4  bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">
+                      Send
+                    </button>
+                  </span>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock content %}

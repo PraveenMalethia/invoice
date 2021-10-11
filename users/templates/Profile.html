@@ -1,0 +1,100 @@
+{% extends "layouts/base.html" %}
+{% block content %}
+
+{% if messages %}
+  
+<section class="text-gray-600 body-font">
+  <div class="container mx-auto px-2">
+    <div class="flex flex-col text-center w-full">
+      {% for msg in messages %}
+      {% if msg.tags == 'error' %}
+      <p class="lg:w-2/3 mx-auto leading-relaxed font-bold text-base bg-red-500 mt-2 text-white tailwindalert">{{msg}}
+        <button class="appearance:none tailwindalertdismiss ml-3">X</button>
+      </p>
+      {% endif %}
+      {% if msg.tags == 'success' %}
+      <p class="lg:w-2/3 mx-auto leading-relaxed font-bold text-base bg-green-500 mt-2 text-white tailwindalert">{{msg}}
+        <button class="appearance:none tailwindalertdismiss ml-3">X</button>
+      </p>
+      {% endif %}
+      {% if msg.tags == 'warning' %}
+      <p class="lg:w-2/3 mx-auto leading-relaxed font-bold text-base bg-yellow-500 mt-2 text-white tailwindalert">
+        {{msg}} <button class="appearance:none tailwindalertdismiss ml-3">X</button> </p>
+      {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+<section class="text-gray-600 body-font">
+  <div class="container px-5 py-24 mx-auto flex flex-wrap">
+    <div class="flex flex-wrap w-full">
+      <div class="lg:w-2/5 md:w-1/2 md:pr-10 md:py-6">
+        <div class="bg-gray-800 max-w-2xl shadow overflow-hidden sm:rounded-lg">
+          <div>
+            <dl>
+              <div class="bg-gray-800 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">
+                  Full name
+                </dt>
+                <dd class="mt-1 text-sm text-gray-300 sm:mt-0 sm:col-span-2">
+                  {{request.user.first_name}} {{request.user.last_name}}
+                </dd>
+              </div>
+              <div class="bg-gray-800 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">
+                  Email Address
+                </dt>
+                <dd class="mt-1 text-sm text-gray-300 sm:mt-0 sm:col-span-2">
+                  {{request.user.email}}
+                </dd>
+              </div>
+              <div class="bg-gray-800 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">
+                  Last Login
+                </dt>
+                <dd class="mt-1 text-sm text-gray-300 sm:mt-0 sm:col-span-2">
+                  {{request.user.last_login}}
+                </dd>
+              </div>
+              <div class="bg-gray-800 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">
+                  Profile
+                </dt>
+                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                  <a href="{% url 'editprofile' %}"
+                    class="py-2 px-4 flex justify-center items-center  bg-green-500 hover:bg-green-700 focus:ring-green-500 focus:ring-offset-green-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                      stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                    </svg>
+                    Update Profile
+                  </a>
+                </dd>
+              </div>
+              <div class="bg-gray-800 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">
+                  Settings
+                </dt>
+                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                  <a href="#"
+                    class="py-2 px-4 flex justify-center items-center  bg-red-600 hover:bg-red-700 focus:ring-red-500 focus:ring-offset-red-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                      stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                    </svg>
+                    Update Password
+                  </a>
+                </dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<br><br><br><br><br><br><br><br>
+{% endblock content %}
