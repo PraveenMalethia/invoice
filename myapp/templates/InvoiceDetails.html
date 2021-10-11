@@ -7,25 +7,15 @@
     <div class="w-full h-0.5 bg-indigo-500"></div>
     <div class="flex justify-between p-4">
       <div>
-        <h6 class="font-bold">Order Date : <span class="text-sm font-medium"> 12/12/2022</span></h6>
-        <h6 class="font-bold">Order ID : <span class="text-sm font-medium"> 12/12/2022</span></h6>
+        <h6 class="font-bold">Order Date : <span class="text-sm font-medium"> {{invoice.date_created}}</span></h6>
+        <h6 class="font-bold">Order ID : <span class="text-sm font-medium">{{invoice.id}}</span></h6>
+      </div>
+      <div class="w-40">
       </div>
       <div class="w-40">
         <address class="text-sm">
-          <span class="font-bold"> Billed To : </span>
-          Joe Smith
-          795 Folsom Ave
-          San Francisco, CA 94107
-          P: (123) 456-7890
-        </address>
-      </div>
-      <div class="w-40">
-        <address class="text-sm">
-          <span class="font-bold">Ship To :</span>
-          Joe doe
-          800 Folsom Ave
-          San Francisco, CA 94107
-          P: + 111-456-7890
+          <span class="font-bold">Billed To : </span>
+          {{invoice.customer.email}}
         </address>
       </div>
       <div></div>
@@ -42,46 +32,62 @@
                 Description
               </th>
               <th class="px-4 py-2 text-xs text-gray-300 ">
-                Quantity
-              </th>
-              <th class="px-4 py-2 text-xs text-gray-300 ">
                 Price
-              </th>
-              <th class="px-4 py-2 text-xs text-gray-300 ">
-                Subtotal
               </th>
             </tr>
           </thead>
           <tbody class="bg-gray-800">
             <tr class="whitespace-nowrap">
               <td class="px-6 py-4 text-sm text-gray-300">
-                1
+                #
               </td>
               <td class="px-6 py-4">
                 <div class="text-sm text-gray-200">
                   {{invoice.description}}
                 </div>
               </td>
-              <td class="px-6 py-4">
-                <div class="text-sm text-gray-300">4</div>
-              </td>
               <td class="px-6 py-4 text-sm text-gray-300">
-                $20
+                $ {{invoice.price}}
+              </td>
+            </tr>
+            <tr class="flex justify-center">
+              <td>Items</td>
+            </tr>
+            {% for item in invoice.items.all %}
+            <tr class="whitespace-nowrap">
+              <td class="px-6 py-4 text-sm text-gray-300">
+                {{forloop.counter}}
               </td>
               <td class="px-6 py-4">
-                $30
+                <div class="text-sm text-gray-200">
+                  {{item.product_name}}
+                </div>
               </td>
             </tr>
-            <!--end tr-->
-            <tr class="text-white bg-gray-800">
-              <th colspan="3"></th>
-              <td class="text-sm font-bold"><b>Total</b></td>
-              <td class="text-sm font-bold"><b>$999.0</b></td>
-            </tr>
-            <!--end tr-->
+            {% endfor %}
           </tbody>
         </table>
       </div>
+    </div>
+    <div class="flex items-center justify-center mb-10">
+      <form action="." method="post"> {% csrf_token %}
+        <label class="text-gray-200 text-center" for="animals">
+          Add Items
+          <select id="animals"
+            class="block w-52 py-2 px-3 border border-gray-900 bg-gray-800 bg-white rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
+            name="item_id">
+            <option value="">
+              Select an option
+            </option>
+            {% for item in items %}
+            <option value="{{item.id}}">
+              {{item.product_name}}
+            </option>
+            {% endfor %}
+          </select>
+        </label>
+        <button class="py-2 px-4 bg-gray-700 rounded w-full mt-4 ring ring-gray-600 hover:bg-gray-600 transition duration-300 easy-in-out">Add</button>
+      </form>
     </div>
     <div class="w-full h-0.5 bg-indigo-500"></div>
     <div class="p-4">

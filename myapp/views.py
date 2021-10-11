@@ -46,12 +46,30 @@ def CreateCustomer(request):
     template = "CreateCustomer.html"
     return render(request,template,context)
 
+
+def CreateItem(request):
+    context = {}
+    if request.method == "POST":
+        product_name = request.POST.get('product_name')
+        item = Item.objects.create(user=request.user, product_name=product_name)
+        item.save()
+        return redirect('/')
+    template = "CreateItem.html"
+    return render(request,template,context)
+
 # view for rendering html to pdf files
 def InvoiceDetails(request,id):
     context = {}
     template = "InvoiceDetails.html"
     invoice = Invoice.objects.get(id=id)
     context['invoice'] = invoice
+    items = Item.objects.filter(user=request.user)
+    context['items'] = items
+    if request.method == "POST":
+        item_id = request.POST.get('item_id')
+        item = Item.objects.get(id= int(item_id))
+        invoice.items.add(item)
+        invoice.save()
     return render(request,template,context)
 
 def render_to_pdf(template_src, context_dict={}):

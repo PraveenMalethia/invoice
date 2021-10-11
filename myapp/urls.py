@@ -6,6 +6,7 @@ urlpatterns = [
     path("", views.Home, name="Home"),
     path("create-invoice", views.CreateInvoice, name="create-invoice"),
     path("create-customer", views.CreateCustomer, name="create-customer"),
+    path("create-item", views.CreateItem, name="create-item"),
     path("invoice-details/<int:id>/", views.InvoiceDetails, name="invoice-detail"),
     path("invoice-pdf/<int:id>/", views.InvoicePDF, name="invoice-pdf"),
 ]

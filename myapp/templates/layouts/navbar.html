@@ -10,6 +10,7 @@
       <a href="{% url 'Home' %}" class="mr-5 hover:text-white transition easy-in-out duration-200 hover:bg-gray-800 rounded px-4 py-2">Dashboard</a>
       <a href="{% url 'create-invoice' %}" class="mr-5 hover:text-white transition easy-in-out duration-200 hover:bg-gray-800 rounded px-4 py-2">Create Invoice</a>
       <a href="{% url 'create-customer' %}" class="mr-5 hover:text-white transition easy-in-out duration-200 hover:bg-gray-800 rounded px-4 py-2">Create Customer</a>
+      <a href="{% url 'create-item' %}" class="mr-5 hover:text-white transition easy-in-out duration-200 hover:bg-gray-800 rounded px-4 py-2">Create Item</a>
       <a href="{% url 'profile' %}" class="mr-5 hover:text-white transition easy-in-out duration-200 hover:bg-gray-800 rounded px-4 py-2">Profile</a>
     </nav>
     {% if request.user.is_authenticated %}
